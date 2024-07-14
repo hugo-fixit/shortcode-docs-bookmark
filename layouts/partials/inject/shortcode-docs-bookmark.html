@@ -1,0 +1,9 @@
+{{- if .HasShortcode "fixit-docs-bookmark" -}}
+  {{- $fingerprint := .Scratch.Get "fingerprint" -}}
+
+  {{- /* fixit-docs-bookmark.min.css */ -}}
+  {{- $options := dict "Source" "css/fixit-docs-bookmark/index.scss" "Fingerprint" $fingerprint -}}
+  {{- $toCSS := dict "targetPath" "css/fixit-docs-bookmark.min.css" "enableSourceMap" true -}}
+  {{- $options = dict "Context" . "ToCSS" $toCSS | merge $options -}}
+  {{- partial "plugin/style.html" $options -}}
+{{- end -}}
