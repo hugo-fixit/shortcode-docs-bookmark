@@ -1,3 +1,18 @@
+// Color of the background
+$global-background-color: #ffffff !default;
+$global-background-color-dark: #292a2e !default;
+
+// Color of the border
+$global-border-color: #f0f0f0 !default;
+
+// Color of the link
+$global-link-color: #161209 !default;
+$global-link-color-dark: #b1b1ba !default;
+
+// Color of the hover link
+$global-link-hover-color: #2983bb !default; // 潮蓝
+$global-link-hover-color-dark: #fff !default;
+
 .fixit-docs-navigation {
   display: flex;
   justify-content: center;
@@ -30,8 +45,6 @@
       --timeline-cyclic-color: #FF735A;
       --timeline-cyclic-size: 10px;
       --timeline-width: 2px;
-
-      @include link(true, true);
 
       @for $i from 1 through 4 {
         &:nth-child(#{$i}) {
@@ -94,6 +107,25 @@
       [data-theme='dark'] & {
         --timeline-color: #{darken($global-border-color, 50%)};
       }
+
+      a,
+      a::before,
+      a::after {
+        color: $global-link-color;
+
+        [data-theme='dark'] & {
+          color: $global-link-color-dark;
+        }
+      }
+
+      a:active,
+      a:hover {
+        color: $global-link-hover-color;
+
+        [data-theme='dark'] & {
+          color: $global-link-hover-color-dark;
+        }
+      }
     }
   }
   
@@ -129,7 +161,7 @@
     }
 
     &::after {
-      background-image: url(/images/apple-devices-preview.webp);
+      background-image: url(https://fixit.lruihao.cn/images/apple-devices-preview.webp);
       background-size: 130%;
     }
   }
