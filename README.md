@@ -1,16 +1,39 @@
-# Theme Component
+# fixit-docs-bookmark
 
-## Demo
+🔖 Embed bookmark of FixIt Docs.
+
+![preview](http://lruihao.cn/posts/fixit-docs-bookmark/images/featured-image.webp)
 
 ## Requirements
 
-## Installation
+- FixIt v0.3.9 or later.
 
-## Configuration
+## Install Component
 
-## Usage
+The installation method is the same as [installing a theme](https://fixit.lruihao.cn/documentation/installation/). There are several ways to install, choose one, for example, install through Hugo Modules:
 
-## References
+```diff
+[module]
+  [[module.imports]]
+    path = "github.com/hugo-fixit/FixIt"
++ [[module.imports]]
++   path = "github.com/hugo-fixit/shortcode-docs-bookmark"
+```
 
-- https://fixit.lruihao.cn/zh-cn/contributing/components
-- https://fixit.lruihao.cn/zh-cn/components/dev-component/
+## Inject Partial
+
+Inject the `fixit-docs-bookmark.html` into the `custom-head` through the custom block opened by the FixIt theme in the `layouts/partials/custom.html` file:
+
+```go-html-template
+{{- define "custom-head" -}}
+  {{- partial "inject/fixit-docs-bookmark.html" . -}}
+{{- end -}}
+```
+
+## Use Shortcode
+
+Here is an example of usage:
+
+```markdown
+{{< fixit-docs-bookmark >}}
+```
