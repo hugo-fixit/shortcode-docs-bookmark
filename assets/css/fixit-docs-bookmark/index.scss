@@ -26,7 +26,7 @@ $global-link-hover-color-dark: #fff !default;
   transition: background-color 0.5s, border-color 0.5s;
 
   [data-theme='dark'] & {
-    background: inherit;
+    background: $global-background-color-dark;
     border-color: #fff;
   }
 
