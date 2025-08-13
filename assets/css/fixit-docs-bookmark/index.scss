@@ -12,6 +12,7 @@ $global-link-color-dark: #b1b1ba !default;
 // Color of the hover link
 $global-link-hover-color: #2983bb !default; // 潮蓝
 $global-link-hover-color-dark: #fff !default;
+$rootPrefix: --fi- !default;
 
 .fixit-docs-navigation {
   display: flex;
@@ -152,7 +153,7 @@ $global-link-hover-color-dark: #fff !default;
 
     &::before {
       background-color: rgba(204, 204, 204, 0.1);
-      background-image: url(/images/loading.min.svg);
+      background-image: var(#{$rootPrefix}loading-img);
       background-size: 60px;
 
       [data-theme='dark'] & {
