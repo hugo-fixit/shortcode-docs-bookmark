@@ -17,7 +17,7 @@ $rootPrefix: --fi- !default;
 .fixit-docs-navigation {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   max-width: 100%;
   position: relative;
   border-radius: 2.5px;
@@ -36,7 +36,7 @@ $rootPrefix: --fi- !default;
     text-align: left;
     list-style: none !important;
     margin-inline: auto;
-    flex-shrink: 0;
+    flex-shrink: 1;
 
     li {
       position: relative;
@@ -173,7 +173,9 @@ $rootPrefix: --fi- !default;
 // ==============================
 @media only screen and (max-width: 680px) {
   .fixit-docs-navigation {
+    flex-wrap: wrap;
     .fixit-docs-outline {
+      flex-shrink: 0;
       li {
         padding-block: 0.25rem;
       }
