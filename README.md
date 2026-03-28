@@ -6,7 +6,7 @@
 
 ## Requirements
 
-- FixIt v0.4.0 or later.
+- FixIt v1.0.0 or later.
 
 ## Install Component
 

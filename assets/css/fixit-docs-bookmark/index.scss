@@ -1,18 +1,18 @@
-// Color of the background
-$global-background-color: #ffffff !default;
-$global-background-color-dark: #292a2e !default;
-
-// Color of the border
-$global-border-color: #f0f0f0 !default;
-
-// Color of the link
-$global-link-color: #161209 !default;
-$global-link-color-dark: #b1b1ba !default;
-
-// Color of the hover link
-$global-link-hover-color: #2983bb !default; // 潮蓝
-$global-link-hover-color-dark: #fff !default;
 $rootPrefix: --fi- !default;
+
+@function fixit-var($name, $fallback: null) {
+  @if $fallback {
+    @return var(#{$rootPrefix}#{$name}, #{$fallback});
+  } @else {
+    @return var(#{$rootPrefix}#{$name});
+  }
+}
+
+@mixin set-fixit-vars($vars) {
+  @each $name, $value in $vars {
+    #{$rootPrefix}#{$name}: #{$value};
+  }
+}
 
 .fixit-docs-navigation {
   display: flex;
@@ -22,13 +22,12 @@ $rootPrefix: --fi- !default;
   position: relative;
   border-radius: 2.5px;
   margin-block: 2rem;
-  background: linear-gradient($global-background-color, $global-background-color) padding-box, linear-gradient(45deg, #42d392, #FF7359) border-box;
-  border: 0.25rem solid transparent;
+  background: linear-gradient(fixit-var(global-background-color), fixit-var(global-background-color)) padding-box, linear-gradient(45deg, #42d392, #FF7359) border-box;
+  border: 0.25rem solid light-dark(transparent, #fff);
   transition: background-color 0.5s, border-color 0.5s;
 
-  [data-theme='dark'] & {
-    background: $global-background-color-dark;
-    border-color: #fff;
+  [data-theme-mode='dark'] & {
+    background: fixit-var(global-background-color);
   }
 
   .fixit-docs-outline {
@@ -37,19 +36,23 @@ $rootPrefix: --fi- !default;
     list-style: none !important;
     margin-inline: auto;
     flex-shrink: 1;
+    @include set-fixit-vars((
+      timeline-color: fixit-var(global-border-color),
+      timeline-circle-color: #FF735A,
+      timeline-circle-size: 10px,
+      timeline-width: 2px,
+    ));
 
     li {
       position: relative;
       padding: 0.5rem 1.5rem;
       font-size: 18px;
-      --timeline-color: #{darken($global-border-color, 5%)};
-      --timeline-circle-color: #FF735A;
-      --timeline-circle-size: 10px;
-      --timeline-width: 2px;
 
       @for $i from 1 through 4 {
         &:nth-child(#{$i}) {
-          --timeline-index: #{$i};
+          @include set-fixit-vars((
+            timeline-index: #{$i},
+          ));
 
           &::before {
             content: '#{$i}';
@@ -62,70 +65,55 @@ $rootPrefix: --fi- !default;
         top: 50%;
         transform: translateY(-50%);
         left: 0;
-        width: var(--timeline-circle-size);
-        height: var(--timeline-circle-size);
-        font-size: var(--timeline-circle-size);
-        line-height: var(--timeline-circle-size);
         text-align: center;
         border-radius: 50%;
-        border: var(--timeline-width) solid var(--timeline-color);
-        background-color: $global-background-color;
         color: transparent;
         z-index: 1;
+        width: fixit-var(timeline-circle-size);
+        height: fixit-var(timeline-circle-size);
+        font-size: fixit-var(timeline-circle-size);
+        line-height: fixit-var(timeline-circle-size);
+        border-width: fixit-var(timeline-width);
+        border: fixit-var(timeline-width) solid fixit-var(timeline-color);
+        background-color: fixit-var(global-background-color);
         animation-name: border-color-fade;
         animation-duration: 2s;
         animation-iteration-count: infinite;
-        animation-delay: calc(var(--timeline-index) * 0.3s);
+        animation-delay: calc(#{fixit-var(timeline-index)} * 0.3s);
 
         @keyframes border-color-fade {
           0% {
-            border-color: var(--timeline-color);
+            border-color: fixit-var(timeline-color);
           }
           50% {
-            border-color: var(--timeline-circle-color);
+            border-color: fixit-var(timeline-circle-color);
             // 显示序号
-            // color: #358C3C;
+            color: fixit-var(timeline-circle-color);
           }
           100% {
-            border-color: var(--timeline-color);
+            border-color: fixit-var(timeline-color);
           }
-        }
-
-        [data-theme='dark'] & {
-          background-color: $global-background-color-dark;
         }
       }
       &::after {
         content: '';
         position: absolute;
         top: 0;
-        left: calc(var(--timeline-circle-size) / 2 + var(--timeline-width) / 2);
-        width: var(--timeline-width);
+        left: calc(#{fixit-var(timeline-circle-size)} / 2 + #{fixit-var(timeline-width)} / 2);
+        width: fixit-var(timeline-width);
         height: 100%;
-        background-color: var(--timeline-color);
-      }
-
-      [data-theme='dark'] & {
-        --timeline-color: #{darken($global-border-color, 50%)};
+        background-color: fixit-var(timeline-color);
       }
 
       a,
       a::before,
       a::after {
-        color: $global-link-color;
-
-        [data-theme='dark'] & {
-          color: $global-link-color-dark;
-        }
+        color: fixit-var(global-link-color);
       }
 
       a:active,
       a:hover {
-        color: $global-link-hover-color;
-
-        [data-theme='dark'] & {
-          color: $global-link-hover-color-dark;
-        }
+        color: fixit-var(global-link-hover-color);
       }
     }
   }
@@ -152,13 +140,9 @@ $rootPrefix: --fi- !default;
     }
 
     &::before {
-      background-color: rgba(204, 204, 204, 0.1);
+      background-color: light-dark(rgba(204, 204, 204, 0.1), rgba(0, 0, 0, 0.1));
       background-image: var(#{$rootPrefix}loading-img);
       background-size: 60px;
-
-      [data-theme='dark'] & {
-        background-color: rgba(0, 0, 0, 0.1);
-      }
     }
 
     &::after {
