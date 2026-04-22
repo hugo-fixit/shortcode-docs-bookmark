@@ -1,18 +1,6 @@
-$rootPrefix: --fi- !default;
-
-@function fixit-var($name, $fallback: null) {
-  @if $fallback {
-    @return var(#{$rootPrefix}#{$name}, #{$fallback});
-  } @else {
-    @return var(#{$rootPrefix}#{$name});
-  }
-}
-
-@mixin set-fixit-vars($vars) {
-  @each $name, $value in $vars {
-    #{$rootPrefix}#{$name}: #{$value};
-  }
-}
+@import "_variables";
+@import 'core/functions';
+@import 'core/mixins';
 
 .fixit-docs-navigation {
   display: flex;
@@ -22,12 +10,14 @@ $rootPrefix: --fi- !default;
   position: relative;
   border-radius: 2.5px;
   margin-block: 2rem;
-  background: linear-gradient(fixit-var(global-background-color), fixit-var(global-background-color)) padding-box, linear-gradient(45deg, #42d392, #FF7359) border-box;
+  background:
+    linear-gradient(fi-var(global-background-color), fi-var(global-background-color)) padding-box,
+    linear-gradient(45deg, #42d392, #FF7359) border-box;
   border: 0.25rem solid light-dark(transparent, #fff);
   transition: background-color 0.5s, border-color 0.5s;
 
-  [data-theme-mode='dark'] & {
-    background: fixit-var(global-background-color);
+  @include dark-mode {
+    background: fi-var(global-background-color);
   }
 
   .fixit-docs-outline {
@@ -36,8 +26,8 @@ $rootPrefix: --fi- !default;
     list-style: none !important;
     margin-inline: auto;
     flex-shrink: 1;
-    @include set-fixit-vars((
-      timeline-color: fixit-var(global-border-color),
+    @include set-fi-vars((
+      timeline-color: fi-var(global-border-color),
       timeline-circle-color: #FF735A,
       timeline-circle-size: 10px,
       timeline-width: 2px,
@@ -50,7 +40,7 @@ $rootPrefix: --fi- !default;
 
       @for $i from 1 through 4 {
         &:nth-child(#{$i}) {
-          @include set-fixit-vars((
+          @include set-fi-vars((
             timeline-index: #{$i},
           ));
 
@@ -69,29 +59,29 @@ $rootPrefix: --fi- !default;
         border-radius: 50%;
         color: transparent;
         z-index: 1;
-        width: fixit-var(timeline-circle-size);
-        height: fixit-var(timeline-circle-size);
-        font-size: fixit-var(timeline-circle-size);
-        line-height: fixit-var(timeline-circle-size);
-        border-width: fixit-var(timeline-width);
-        border: fixit-var(timeline-width) solid fixit-var(timeline-color);
-        background-color: fixit-var(global-background-color);
+        width: fi-var(timeline-circle-size);
+        height: fi-var(timeline-circle-size);
+        font-size: fi-var(timeline-circle-size);
+        line-height: fi-var(timeline-circle-size);
+        border-width: fi-var(timeline-width);
+        border: fi-var(timeline-width) solid fi-var(timeline-color);
+        background-color: fi-var(global-background-color);
         animation-name: border-color-fade;
         animation-duration: 2s;
         animation-iteration-count: infinite;
-        animation-delay: calc(#{fixit-var(timeline-index)} * 0.3s);
+        animation-delay: calc(#{fi-var(timeline-index)} * 0.3s);
 
         @keyframes border-color-fade {
           0% {
-            border-color: fixit-var(timeline-color);
+            border-color: fi-var(timeline-color);
           }
           50% {
-            border-color: fixit-var(timeline-circle-color);
+            border-color: fi-var(timeline-circle-color);
             // 显示序号
-            color: fixit-var(timeline-circle-color);
+            color: fi-var(timeline-circle-color);
           }
           100% {
-            border-color: fixit-var(timeline-color);
+            border-color: fi-var(timeline-color);
           }
         }
       }
@@ -99,21 +89,21 @@ $rootPrefix: --fi- !default;
         content: '';
         position: absolute;
         top: 0;
-        left: calc(#{fixit-var(timeline-circle-size)} / 2 + #{fixit-var(timeline-width)} / 2);
-        width: fixit-var(timeline-width);
+        left: calc(#{fi-var(timeline-circle-size)} / 2 + #{fi-var(timeline-width)} / 2);
+        width: fi-var(timeline-width);
         height: 100%;
-        background-color: fixit-var(timeline-color);
+        background-color: fi-var(timeline-color);
       }
 
       a,
       a::before,
       a::after {
-        color: fixit-var(global-link-color);
+        color: fi-var(global-link-color);
       }
 
       a:active,
       a:hover {
-        color: fixit-var(global-link-hover-color);
+        color: fi-var(global-link-hover-color);
       }
     }
   }

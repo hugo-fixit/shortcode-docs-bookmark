@@ -2,7 +2,7 @@
   {{- $fingerprint := .Site.Store.Get "fingerprint" -}}
 
   {{- /* fixit-docs-bookmark.min.css */ -}}
-  {{- $options := dict "Source" "scss/fixit-docs-bookmark/index.scss" "Fingerprint" $fingerprint -}}
+  {{- $options := dict "Source" "scss/fixit-docs-bookmark.scss" "Fingerprint" $fingerprint -}}
   {{- $toCSS := dict "targetPath" "css/fixit-docs-bookmark.min.css" "enableSourceMap" true -}}
   {{- $options = dict "Context" . "ToCSS" $toCSS | merge $options -}}
   {{- partial "plugin/style.html" $options -}}
