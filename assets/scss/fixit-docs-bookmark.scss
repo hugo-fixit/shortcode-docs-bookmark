@@ -1,6 +1,6 @@
-@import "_variables";
-@import 'core/functions';
-@import 'core/mixins';
+@use "variables" as *;
+@use "core/functions" as *;
+@use "core/mixins" as *;
 
 .fixit-docs-navigation {
   display: flex;
@@ -27,7 +27,6 @@
     margin-inline: auto;
     flex-shrink: 1;
     @include set-fi-vars((
-      timeline-color: fi-var(global-border-color),
       timeline-circle-color: #FF735A,
       timeline-circle-size: 10px,
       timeline-width: 2px,
@@ -64,7 +63,7 @@
         font-size: fi-var(timeline-circle-size);
         line-height: fi-var(timeline-circle-size);
         border-width: fi-var(timeline-width);
-        border: fi-var(timeline-width) solid fi-var(timeline-color);
+        border: fi-var(timeline-width) solid fi-var(global-border-color);
         background-color: fi-var(global-background-color);
         animation-name: border-color-fade;
         animation-duration: 2s;
@@ -72,16 +71,10 @@
         animation-delay: calc(#{fi-var(timeline-index)} * 0.3s);
 
         @keyframes border-color-fade {
-          0% {
-            border-color: fi-var(timeline-color);
-          }
           50% {
             border-color: fi-var(timeline-circle-color);
             // 显示序号
             color: fi-var(timeline-circle-color);
-          }
-          100% {
-            border-color: fi-var(timeline-color);
           }
         }
       }
@@ -92,7 +85,7 @@
         left: calc(#{fi-var(timeline-circle-size)} / 2 + #{fi-var(timeline-width)} / 2);
         width: fi-var(timeline-width);
         height: 100%;
-        background-color: fi-var(timeline-color);
+        background-color: fi-var(global-border-color);
       }
 
       a,

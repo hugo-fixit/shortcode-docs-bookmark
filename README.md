@@ -6,7 +6,8 @@
 
 ## Requirements
 
-- FixIt v1.0.0 or later.
+- v2 requires FixIt v1.x
+- v1 requires FixIt v0.4.x
 
 ## Install Component
 
@@ -26,7 +27,7 @@ In order to Inject the partial `fixit-docs-bookmark.html` into the `custom-head`
 
 ```toml
 [params]
-  [params.customPartials]
+  [params.custom_partials]
     # ... other partials
     head = [ "inject/fixit-docs-bookmark.html" ]
     # ... other partials
