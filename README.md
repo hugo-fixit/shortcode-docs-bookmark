@@ -18,7 +18,7 @@ The installation method is the same as [installing a theme](https://fixit.lruiha
   [[module.imports]]
     path = "github.com/hugo-fixit/FixIt"
 + [[module.imports]]
-+   path = "github.com/hugo-fixit/shortcode-docs-bookmark"
++   path = "github.com/hugo-fixit/shortcode-docs-bookmark/v2"
 ```
 
 ## Configuration
