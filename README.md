@@ -11,7 +11,7 @@
 
 ## Install Component
 
-The installation method is the same as [installing a theme](https://fixit.lruihao.cn/documentation/installation/). There are several ways to install, choose one, for example, install through Hugo Modules:
+The installation method is the same as [installing a theme](https://fixit.lruihao.cn/docs/installation/). There are several ways to install, choose one, for example, install through Hugo Modules:
 
 ```diff
 [module]
